@@ -19,12 +19,18 @@ q = density of N(5,1) = exp(-(x-5)^2/2)/sqrt(2*pi)
 
 # 1 line Importance Sampling, with Gaussian proposal
 mean(sapply(rnorm(100000,5,1), function(x) { ifelse(x>5, exp((25-10*x)/2),0) }))
-= 2.856604e-07
+2.856604e-07
 
 Consider proposal distribution of Uniform centered at 5 with width 20, ie. U[-5,15]
 p/q = 20*exp(-x^2/2)/sqrt(2*pi)
 
 # 1 line Importance Sampling, with Uniform proposal
 mean(sapply(runif(1000,-5,15), function(x) { ifelse(x>5, 20*exp(-x^2/2)/sqrt(2*pi),0) }))
-[1] 2.6877e-07
+2.6877e-07
+
+Ofcourse, since we don't plan to use samples with x < 5, why produce them in the first place ?
+Simply start the distribution at 5 & explore the right tail.
+Say the proposal q = U[5,15] Density is 1/10. So p/q = 10*p = 10*dnorm
+10*mean(sapply(runif(1000,5,15), dnorm))
+2.825891e-07
 ```
