@@ -3,12 +3,12 @@
 ```{R}
 
 Suppose you'd like to estimate the probability of drawing 5 or more from a standard normal.
-Exact: Integral of exp(-x^2)/sqrt(2*pi), from 5 to infinity
+Exact: Integral of p = exp(-x^2)/sqrt(2*pi), from 5 to infinity
 In R: 1 - pnorm(5) = 2.866516e-07
 
-Instead, consider proposal distribution N(5,1) ie. Gaussian centered at 5.
+Instead, consider proposal distribution q = N(5,1) ie. Gaussian centered at 5.
 Integral(p) = Integral(pq/q) = Integral(p/q)*q = Expectation(p/q) under q.
-We've changed measure from p to q now.
+We've changed measure from p to q.
 Simply sample from q & compute p/q whenever samples are greater than 5.
 Mean of above samples is the desired probability.
 
