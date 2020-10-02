@@ -4,7 +4,13 @@
 
 Suppose you'd like to estimate the probability of drawing 5 or more from a standard normal.
 Exact: Integral of p = exp(-x^2)/sqrt(2*pi), from 5 to infinity
-In R: 1 - pnorm(5) = 2.866516e-07
+In R: 
+# Use Numeric Integration
+> integrate(function(x) { exp(-x^2/2)/sqrt(2*pi)} , 5, Inf)
+2.866516e-07 with absolute error < 8.9e-10
+# Use the CDF
+> 1 - pnorm(5) 
+2.866516e-07
 
 Instead, consider proposal distribution q = N(5,1) ie. Gaussian centered at 5.
 Integral(p) = Integral(pq/q) = Integral(p/q)*q = Expectation(p/q) under q.
